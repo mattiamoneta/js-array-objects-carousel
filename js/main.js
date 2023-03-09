@@ -78,21 +78,18 @@ for(let i = 0; i < domThumbnailItems.length; i++){
 
 // Bottone autoplay start
 domBtnAutoplayStart.addEventListener("click", function(){
-    autoPlayReverseCarousel(false);
-    autoPlayCarousel(true);
+    autoplay(true, 1);
    
 });
 
 // Bottone autoplay stop
 domBtnAutoplayStop.addEventListener("click", function(){
-    autoPlayCarousel(false);
-    autoPlayReverseCarousel(false);
+    autoplay(false);
 });
 
 // Reverse Carousel
 domBtnAutoplayReverse.addEventListener("click", function(){
-    autoPlayCarousel(false);
-    autoPlayReverseCarousel(true);
+    autoplay(true, 0);
 });
 
 
@@ -104,61 +101,38 @@ domBtnPrev.addEventListener('click', () =>  carouselBack());
 
 
 //Autoplay
-function autoPlayCarousel(playback){
-    
+function autoplay(playback, direction){
     if(playback == true){
         carouselRunning = setInterval(() => {
-           carouselNext()
+           if(direction == 1){
+            carouselNext()
+           }else{
+            carouselBack()
+           }
         }, 3000)
     } else {
         clearInterval(carouselRunning);
     }
-
 }
 
-// Carosello in reverse autoplay
-function autoPlayReverseCarousel(playback){
-    
-    if(playback == true){
-        carouselRunning = setInterval(() => carouselBack(), 3000)
-    } else {
-        clearInterval(carouselRunning);
-    }
-
-}
 
 // Avanti di una slide
 function carouselNext(){
-    if (activeItem < domCarouselItems.length - 1){
-        domCarouselItems[activeItem].classList.remove('current');
-        domThumbnailItems[activeItem].classList.remove('current');
-        activeItem++;
-        domCarouselItems[activeItem].classList.add('current');
-        domThumbnailItems[activeItem].classList.add('current');
 
-    } else if (activeItem == domCarouselItems.length - 1){
-        domCarouselItems[activeItem].classList.remove('current');
-        domThumbnailItems[activeItem].classList.remove('current');
-        activeItem = 0;
-        domCarouselItems[activeItem].classList.add('current');
-        domThumbnailItems[activeItem].classList.add('current');
-    }
+    domCarouselItems[activeItem].classList.remove('current');
+    domThumbnailItems[activeItem].classList.remove('current');
+    activeItem = activeItem < domCarouselItems.length - 1 ? activeItem += 1 : activeItem = 0;
+    domCarouselItems[activeItem].classList.add('current');
+    domThumbnailItems[activeItem].classList.add('current');
 }
 
 // Indietro di una slide
 function carouselBack(){
-    if (activeItem > 0){
-        domCarouselItems[activeItem].classList.remove('current');
-        domThumbnailItems[activeItem].classList.remove('current');
-        activeItem--;
-        domCarouselItems[activeItem].classList.add('current');
-        domThumbnailItems[activeItem].classList.add('current');
 
-    } else if (activeItem == 0){
-        domCarouselItems[activeItem].classList.remove('current');
-        domThumbnailItems[activeItem].classList.remove('current');
-        activeItem = domCarouselItems.length - 1;
-        domCarouselItems[activeItem].classList.add('current');
-        domThumbnailItems[activeItem].classList.add('current');
-    }
+    domCarouselItems[activeItem].classList.remove('current');
+    domThumbnailItems[activeItem].classList.remove('current');
+    activeItem = activeItem > 0 ? activeItem -= 1 : activeItem = domCarouselItems.length -1
+    domCarouselItems[activeItem].classList.add('current');
+    domThumbnailItems[activeItem].classList.add('current');
+
 }
