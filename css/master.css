@@ -163,6 +163,11 @@ header nav ul li{
 
 .slide-caption h2{
     margin-bottom: 10px;
+    animation: textIn .8s ease;
+}
+
+.slide-caption p{
+    animation: textIn 1.2s ease;
 }
 
 img.carousel-img{
@@ -214,3 +219,14 @@ img.carousel-img{
     margin-top: 10px;
 }
 
+@keyframes textIn {
+    0%{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}

@@ -103,6 +103,7 @@ domBtnPrev.addEventListener('click', () =>  carouselBack());
 //Autoplay
 function autoplay(playback, direction){
     if(playback == true){
+        clearInterval(carouselRunning);
         carouselRunning = setInterval(() => {
            if(direction == 1){
             carouselNext()
