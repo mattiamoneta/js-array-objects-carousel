@@ -31,22 +31,32 @@ const domBtnPrev = document.getElementById('btnPrev');
 const domBtnNext = document.getElementById('btnNext');
 const domCarouselStack = document.querySelector('.carousel-stack');
 const domCarouselThumbnails = document.querySelector('.carousel-thumbnails');
+const domCarouselItems = document.getElementsByClassName('slide');
+const domThumbnailItems = document.getElementsByClassName('thumbnail-wrapper');
 
 
 let carouselStackInner = '';
 let carouselThumbnailsInner = '';
 objImages.forEach(e => {
-    carouselStackInner += `<img class="carousel-img" src="${e.image}" alt="Image"/>`;
+    carouselStackInner += `
+    <div class="slide">
+        <div class="slide-caption">
+            <h2>${e.title}</h2>
+            <p>${e.text}</p>
+        </div>
+        <img class="carousel-img" src="${e.image}" alt="Image"/>
+    </div>
+    `;
     carouselThumbnailsInner += `<div class="thumbnail-wrapper"><div class="thumbnail-overlay"></div><img class="thumbnail" src="${e.image}" alt="Image"/></div>`;
 });
 
 domCarouselStack.innerHTML = carouselStackInner;
 domCarouselThumbnails.innerHTML = carouselThumbnailsInner;
-
-const domCarouselItems = document.getElementsByClassName('carousel-img');
-const domThumbnailItems = document.getElementsByClassName('thumbnail-wrapper');
 domCarouselItems[activeItem].classList.add('current');
 domThumbnailItems[activeItem].classList.add('current');
+
+
+
 
 // Click bottone avanti
 domBtnNext.addEventListener('click',function(){
@@ -87,5 +97,8 @@ domBtnPrev.addEventListener('click',function(){
     }
 
 });
+
+
+//Autoplay
 
 

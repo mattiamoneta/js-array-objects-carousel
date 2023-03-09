@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+html{
+    font-family: 'Roboto', sans-serif;
+}
+
 /* Layout */
 
 .container{
@@ -73,15 +77,39 @@
     background-color: transparent;
 }
 
-img.carousel-img{
+.slide{
+    position: relative;
+    height: 100%;
     display: none;
+}
+
+.slide .slide-caption{
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    right: 50px;
+    bottom: 50px;
+    color: white;
+    text-align: right;
+    text-shadow: 2px 2px black;
+}
+
+.slide-caption h2{
+    margin-bottom: 10px;
+}
+
+img.carousel-img{
+    
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-img.carousel-img.current{
+.slide.current{
     display: block;
 }
 
