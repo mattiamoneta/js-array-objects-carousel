@@ -33,6 +33,10 @@ const domCarouselStack = document.querySelector('.carousel-stack');
 const domCarouselThumbnails = document.querySelector('.carousel-thumbnails');
 const domCarouselItems = document.getElementsByClassName('slide');
 const domThumbnailItems = document.getElementsByClassName('thumbnail-wrapper');
+const domBtnAutoplayStart = document.getElementById("btnAutoplayStart");
+const domBtnAutoplayStop = document.getElementById("btnAutoplayStop");
+const domBtnAutoplayReverse = document.getElementById("btnAutoplayReverse");
+let carouselRunning = false;
 
 
 let carouselStackInner = '';
@@ -56,6 +60,24 @@ domCarouselItems[activeItem].classList.add('current');
 domThumbnailItems[activeItem].classList.add('current');
 
 
+// Bottone autoplay start
+domBtnAutoplayStart.addEventListener("click", function(){
+    autoPlayReverseCarousel(false);
+    autoPlayCarousel(true);
+   
+});
+
+// Bottone autoplay stop
+domBtnAutoplayStop.addEventListener("click", function(){
+    autoPlayCarousel(false);
+    autoPlayReverseCarousel(false);
+});
+
+// Reverse Carousel
+domBtnAutoplayReverse.addEventListener("click", function(){
+    autoPlayCarousel(false);
+    autoPlayReverseCarousel(true);
+});
 
 
 // Click bottone avanti
@@ -101,4 +123,54 @@ domBtnPrev.addEventListener('click',function(){
 
 //Autoplay
 
+function autoPlayCarousel(playback){
+    
+    if(playback == true){
+        carouselRunning = setInterval(() => {
+            if (activeItem < domCarouselItems.length - 1){
+                domCarouselItems[activeItem].classList.remove('current');
+                domThumbnailItems[activeItem].classList.remove('current');
+                activeItem++;
+                domCarouselItems[activeItem].classList.add('current');
+                domThumbnailItems[activeItem].classList.add('current');
+        
+            } else if (activeItem == domCarouselItems.length - 1){
+                domCarouselItems[activeItem].classList.remove('current');
+                domThumbnailItems[activeItem].classList.remove('current');
+                activeItem = 0;
+                domCarouselItems[activeItem].classList.add('current');
+                domThumbnailItems[activeItem].classList.add('current');
+            }
+        }, 3000)
+    } else {
+        clearInterval(carouselRunning);
+    }
 
+}
+
+
+function autoPlayReverseCarousel(playback){
+    
+    if(playback == true){
+        carouselRunning = setInterval(() => {
+              
+        if (activeItem > 0){
+            domCarouselItems[activeItem].classList.remove('current');
+            domThumbnailItems[activeItem].classList.remove('current');
+            activeItem--;
+            domCarouselItems[activeItem].classList.add('current');
+            domThumbnailItems[activeItem].classList.add('current');
+
+        } else if (activeItem == 0){
+            domCarouselItems[activeItem].classList.remove('current');
+            domThumbnailItems[activeItem].classList.remove('current');
+            activeItem = domCarouselItems.length - 1;
+            domCarouselItems[activeItem].classList.add('current');
+            domThumbnailItems[activeItem].classList.add('current');
+        }
+        }, 3000)
+    } else {
+        clearInterval(carouselRunning);
+    }
+
+}

@@ -10,6 +10,10 @@ html{
     font-family: 'Roboto', sans-serif;
 }
 
+body{
+    background-color: #1e1e1e;
+}
+
 /* Layout */
 
 .container{
@@ -149,4 +153,40 @@ img.carousel-img{
 
 #btnNext:hover i{
     margin-top: 10px;
+}
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px 10px;
+}
+
+header nav ul{
+    list-style: none;
+}
+
+header nav ul li{
+    display: inline-block;
+}
+
+.nav-btn{
+    padding: 10px 25px;
+    border-radius: 25px;
+    background-color: #314663;
+    border:  1px solid #1a2738;
+    color: white;
+    font-size: .8rem;
+    transition: all .3s ease;
+    margin-right: 10px;
+}
+
+.nav-btn:hover{
+    cursor: pointer;
+    background-color: #495f7c;
+}
+
+.nav-btn i{
+    margin-right: 5px;
 }
